@@ -1,4 +1,17 @@
 import random
+import constants
+
+HUMAN_MALE_FIRST_NAMES = (
+    "John", "William", "Garreth", "Jared"
+)
+
+HUMAN_FEMALE_FIRST_NAMES = (
+    "Agatha", "Elizabeth", "Jane", "Roberta"
+)
+
+HUMAN_LAST_NAMES = (
+    "Blackstone", "Crownsmith"
+)
 
 ELF_MALE_FIRST_NAMES = (
     "Adran",
@@ -26,6 +39,14 @@ ELF_LAST_NAMES = (
 def generate_name(race, gender):
     """ Create a first and last name for character
     """
-    first = random.choice(ELF_MALE_FIRST_NAMES) if gender == "male" else random.choice(ELF_FEMALE_FIRST_NAMES)
-    last = random.choice(ELF_LAST_NAMES)
+    normalized_race = race.lower()
+    if normalized_race == constants.ELF:
+        first = random.choice(ELF_MALE_FIRST_NAMES) if gender == constants.MALE \
+        else random.choice(ELF_FEMALE_FIRST_NAMES)
+        last = random.choice(ELF_LAST_NAMES)
+    elif normalized_race == constants.HUMAN:
+        # TODO Finish
+        first = random.choice(HUMAN_MALE_FIRST_NAMES) if gender == constants.MALE \
+        else random.choice(HUMAN_FEMALE_FIRST_NAMES)
+        last = random.choice(HUMAN_LAST_NAMES)
     return first, last
